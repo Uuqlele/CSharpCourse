@@ -18,29 +18,34 @@ namespace CSharpCourse
         public int Damage { get; set; }
         public int Exp = 0;
         public int Level = 1;
-        public int Role = 0;
+        public Roles Role = 0;
 
         public Character()
         {
+            CreateCharacter();
+        }
+
+        public void CreateCharacter()
+        {
             Console.Clear();
-            int role = Menu.CreateMenu("Выберете персонажа (хп/урон):",
+            int roleMenu = Menu.CreateMenu("Выберите персонажа (хп/урон):",
                 new List<string>() { "1. Воин (25/4)",
                                      "2. Маг (15/6)",
                                      "3. Вор (20/5)" });
-            switch (role)
+            switch (roleMenu)
             {
                 case (int)Roles.warrior:
-                    Role = (int)Roles.warrior;
+                    Role = Roles.warrior;
                     HitPoints = 25;
                     Damage = 4;
                     break;
                 case (int)Roles.magician:
-                    Role = (int)Roles.magician;
+                    Role = Roles.magician;
                     HitPoints = 15;
                     Damage = 6;
                     break;
                 case (int)Roles.thief:
-                    Role = (int)Roles.thief;
+                    Role = Roles.thief;
                     HitPoints = 20;
                     Damage = 5;
                     break;
@@ -62,35 +67,35 @@ namespace CSharpCourse
         /// </summary>
         /// <param name="enemyHP">ХП противника</param>
         /// <returns>ХП противника</returns>
-        public int Attack(Monster monster, Character theHero)
+        public int Attack(Monster monster)
         {
-            monster.HitPoints -= theHero.Damage;
-            Console.Write("Вы атаковали монстра и нанесли {0} урона. \nЗдоровье монстра: ", theHero.Damage);
+            monster.HitPoints -= Damage;
+            Console.Write("Вы атаковали монстра и нанесли {0} урона. \nЗдоровье монстра: ", Damage);
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("{0}", monster.HitPoints);
             Console.ForegroundColor = ConsoleColor.Red;
             return monster.HitPoints;
         }
 
-        public void UseAbility(ref Monster monster, ref Character theHero)
+        public void UseAbility(ref Monster monster)
         {
-            switch (theHero.Role)
+            switch (Role)
             {
                 case (int)Roles.warrior: //Сильная атака
-                    monster.HitPoints -= theHero.Damage * 2;
-                    Console.Write("Вы атакуете монстра на {0} дмг. \nЗдоровье монстра: ", theHero.Damage * 2);
+                    monster.HitPoints -= Damage * 2;
+                    Console.Write("Вы атакуете монстра на {0} дмг. \nЗдоровье монстра: ", Damage * 2);
                     Console.ForegroundColor = ConsoleColor.White;
-                    Console.WriteLine("{0}", theHero.HitPoints);
+                    Console.WriteLine("{0}", monster.HitPoints);
                     Console.ReadLine();
                     break;
-                case (int)Roles.magician: //Вылечить себя
-                    theHero.HitPoints += theHero.Damage / 2;
-                    Console.Write("Вы лечите себя на {0} хп. \nВаше здоровье: ", theHero.Damage / 2);
+                case Roles.magician: //Вылечить себя
+                    HitPoints += Damage / 2;
+                    Console.Write("Вы лечите себя на {0} хп. \nВаше здоровье: ", Damage / 2);
                     Console.ForegroundColor = ConsoleColor.White;
-                    Console.WriteLine("{0}", theHero.HitPoints);
+                    Console.WriteLine("{0}", HitPoints);
                     Console.ReadLine();
                     break;
-                case (int)Roles.thief:
+                case Roles.thief:
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine("Вор пока что ничего не умеет :)\n");
                     break;

@@ -27,11 +27,11 @@ namespace CSharpCourse
         /// </summary>
         /// <param name="enemyHP"></param>
         /// <returns></returns>
-        public int Attack(Character theHero, Monster monster)
+        public int Attack(Character theHero)
         {
-            theHero.HitPoints -= monster.Damage;
+            theHero.HitPoints -= Damage;
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write("Монстр атаковует вас и наносит {0} урона. \nВаше здоровье: ", monster.Damage, theHero.HitPoints);
+            Console.Write("Монстр атаковует вас и наносит {0} урона. \nВаше здоровье: ", Damage, theHero.HitPoints);
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("{0}", theHero.HitPoints);
 

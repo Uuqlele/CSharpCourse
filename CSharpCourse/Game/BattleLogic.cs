@@ -56,12 +56,12 @@ namespace CSharpCourse
                 switch (selected)
                 {
                     case (int)BattleActions.attack:
-                        monster.HitPoints = theHero.Attack(monster, theHero);
-                        theHero.HitPoints = monster.Attack(theHero, monster);
+                        monster.HitPoints = theHero.Attack(monster);
+                        theHero.HitPoints = monster.Attack(theHero);
                         break;
                     case (int)BattleActions.ability:
-                        theHero.UseAbility(ref monster, ref theHero);
-                        theHero.HitPoints = monster.Attack(theHero, monster);
+                        theHero.UseAbility(ref monster);
+                        theHero.HitPoints = monster.Attack(theHero);
                         break;
                     case (int)BattleActions.defence:
                         break;
